@@ -1,0 +1,23 @@
+{
+  "name": "trabajo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start":"npm index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SikaFlex/TF2EV.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SikaFlex/TF2EV/issues"
+  },
+  "homepage": "https://github.com/SikaFlex/TF2EV#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
