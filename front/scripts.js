@@ -1,31 +1,54 @@
-let totalproductos=[];
+let listaProductos=[];
+let carrito=[];
 let total=0;
 
 function Add(producto, precio) {
+  
+    const prod = listaProductos.find(p => p.id == producto);
+    prod.stock--;
+    
+ 
+
+
     console.log(producto, precio);
-    totalproductos.push(producto);
+    carrito.push(producto);
     total= total + precio;
     document.getElementById('total').innerHTML = 'Total:'+total+'€';
+    vistaProductos();
 }
-
+    //funcion de pago
 async function Pay() {
-    const listaProductos = await (await fetch("/api/pay", {
-      method: "post",
-      body: JSON.stringify(totalproductos),
-      headers: {
-        "Content-type": "application/json"
-      }
+  try{
+    const listaProductos = await (await fetch("/api/pay",{
+        method: "post",
+        body: JSON.stringify(carrito),
+        headers: {
+            "Content-Type": "application/json"
+        }
     })).json();
+}
+   catch (error) {
+    window.alert("No hay stock")
   }
-
-function vistaProductos(listaProductos){
+carrito=[];
+total=0;
+await fetchProductos();
+}
+     
+//visa de como s generar los elementos de la pagina
+function vistaProductos(){
     let productosHTML='';
-    listaProductos.forEach(element => {
-        productosHTML += '<div  class="page-content">' +
-            '<h3>' + element.nombre + '</h3>' +
-            '<img src='+element.imagen+' alt="">' +
-            '<h3>' + element.precio + '€/h</h3>' +
-            '<button onclick="Add(\''+ element.id+ '\', ' + element.precio + ')">Comprar</button>' +
+    listaProductos.forEach(producto => {
+    let buttonHTML='<button onclick="Add(\''+ producto.id+ '\', ' + producto.precio + ')">Comprar</button>'
+    if(producto.stock<=0){
+       buttonHTML='<button disabled class="button disabled" onclick="Add(\''+ producto.id+ '\', ' + producto.precio + ')">Sin Stock</button>'
+    }
+    
+      productosHTML += '<div  class="page-content">' +
+            '<h3>' + producto.nombre + '</h3>' +
+            '<img src='+producto.imagen+' alt="">' +
+            '<h1>' + producto.precio + '€/h</h1>' +
+              buttonHTML +
         '</div>';
     
     });
@@ -33,8 +56,12 @@ function vistaProductos(listaProductos){
 }
 
 
+async function fetchProductos(){
+  listaProductos=await (await fetch("/api/productos")).json();
+  vistaProductos();
+}
+
 window.onload = async() =>{
-   const listaProductos = await (await fetch("/api/productos")).json();
-   console.log(listaProductos);
-   vistaProductos(listaProductos);
+   await fetchProductos();
+
 }
