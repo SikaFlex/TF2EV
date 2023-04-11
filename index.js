@@ -69,24 +69,6 @@ app.get("/api/productos", (req, res) => {
 app.use("/", express.static("front"));
 
 
-//funcion del carro para pagar
-/*app.post("/api/pay", (req, res) => {
-    const ids = req.body;
-    const copiaProductos=productos.map(p=>({...p}));
-    ids.forEach(id => {
-      const producto = copiaProductos.find(p => p.id == id);
-       
-      if (producto.stock>0) {
-        producto.stock--;
-      }
-      else{
-        throw("No hay stock");
-      }
-    });
-    productos=copiaProductos;
-    res.send(productos);
-    
-  });*/
 
   //nueva
   app.post("/api/pay", (req, res) => {
