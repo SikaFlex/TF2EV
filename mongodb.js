@@ -15,6 +15,7 @@ mongoose.connect(url)
 
 
   const productSchema = new Schema({
+    id:Number,
     nombre: String,
     precio: Number,
     imagen: String,
@@ -23,6 +24,10 @@ mongoose.connect(url)
   })
 
   const Producto= new model('Producto',productSchema)
+  Producto.find({}).then (result=>{
+    console.log(result)
+    mongoose.connection.close()
+  })
 
   const newproduct= new Producto({
     id: 5,
