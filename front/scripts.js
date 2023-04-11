@@ -6,11 +6,6 @@ function Add(producto, precio) {
   
     const prod = listaProductos.find(p => p.id == producto);
     prod.stock--;
-    
- 
-
-
-    console.log(producto, precio);
     carrito.push(producto);
     total= total + precio;
     document.getElementById('total').innerHTML = 'Total:'+total+'€';
@@ -33,6 +28,7 @@ async function Pay() {
 carrito=[];
 total=0;
 await fetchProductos();
+document.getElementById("total").innerHTML = `Pagar ${total}`
 }
      
 //visa de como s generar los elementos de la pagina
