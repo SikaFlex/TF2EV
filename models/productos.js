@@ -12,8 +12,9 @@ const productSchema = new Schema({
 
   const Producto= new model('Producto',productSchema)
   Producto.find({}).then (result=>{
-    console.log(result)
     
   })
+
+ 
 
     module.exports=Producto
