@@ -1,10 +1,15 @@
+require('./mongodb')
 const express = require("express");
 const bodyParser= require("body-parser");
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({extends:true}));
+
+const Producto=require('./models/productos')
+
+
 
 //Stock de productos
 let productos = [
@@ -55,8 +60,11 @@ let productos = [
 ];
 
 app.get("/api/productos", (req, res) => {
-  res.send(productos);
+  Producto.find({}).then((productos) => {
+    res.json(productos);
+  });
 });
+
 
 app.use("/", express.static("front"));
 
