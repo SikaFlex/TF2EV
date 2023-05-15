@@ -27,41 +27,38 @@ app.use("/", express.static("front"));
 
 
 
-  app.post("/api/pay", (req, res) => {
-    const ids = req.body;
-    Producto.find({}).then(productos => {
-      const copiaProductos = productos.map(p => ({ ...p.toObject() }));
-      ids.forEach(id => {
-        const producto = copiaProductos.find(p => p.id == id);
-  
-        if (producto.stock > 0) {
-          producto.stock--;
-          Producto.findByIdAndUpdate(producto._id, { stock: producto.stock }, { new: true }).then(updatedProducto => {
-            console.log('Producto actualizado:', updatedProducto); 
-          });
-        } else {
-          throw ("No hay stock");
-        }
-      });
-  
-      res.send(copiaProductos);
-    }).catch(error => {
-      console.log(error);
+app.post("/api/pay", (req, res) => {
+  const ids = req.body;
+  Producto.find({}).then(productos => {
+    const copiaProductos = productos.map(p => ({ ...p.toObject() }));
+    ids.forEach(id => {
+      const producto = copiaProductos.find(p => p.id == id);
+
+      if (producto.stock > 0) {
+        producto.stock--;
+        Producto.findByIdAndUpdate(producto._id, { stock: producto.stock }, { new: true }).then(updatedProducto => {
+         
+        });
+      } else {
+        throw ("No hay stock");
+      }
     });
+
+    res.send(copiaProductos);
+  }).catch(error => {
+    console.log(error);
   });
-  
+});
+
  
 
 
 app.get("/sobrenosotros", (req, res) => {
-  const filePath = path.join(__dirname, "front", "sobrenosotros.html");
+  const filePath = path.join(__dirname, "front", "quienesomos.html");
   res.sendFile(filePath);
 });
 
-app.get("/quienes", (req, res) => {
-  const filePath = path.join(__dirname, "front", "quienessomos.html");
-  res.sendFile(filePath);
-});
+
 app.get("/donde", (req, res) => {
   const filePath = path.join(__dirname, "front", "donde.html");
   res.sendFile(filePath);

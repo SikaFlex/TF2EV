@@ -5,7 +5,7 @@ const {model,Schema}=mongoose
 
 mongoose.connect(url)
   .then(() => {
-    console.log('La base de datos está conectada');
+    console.log('La base de datos está conectada mongo');
   })
   .catch((err) => {
     console.error(err);

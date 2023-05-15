@@ -4,15 +4,22 @@ let total=0;
 let vistaCarrito=[];
 
 
+
+
+
+
 //funcion del boton del elemento
 function Add(producto, precio) {
     
     let prod = listaProductos.find(p => p.id == producto);
-    prod.stock--;
+    prod.stock-2;
     carrito.push(producto);
     vistaCarrito.push(prod);
     total= total + precio;
-    document.getElementById('total').innerHTML = 'Total:'+total+'€';
+    totalred = parseInt(total);
+    
+    
+    document.getElementById('total').innerHTML = 'Total:'+totalred+'€';
 }
 
 
@@ -68,25 +75,30 @@ document.getElementById("total").innerHTML = `Pagar ${total}`//acuatlizamos tota
 
 
 
-function generateProducts(){
-    let productosHTML='';
-    listaProductos.forEach(producto => {
-    let buttonHTML='<button onclick="Add(\''+ producto.id+ '\', ' + producto.precio + ')">Comprar</button>'
-    if(producto.stock<=0){
-       buttonHTML='<button disabled class="button disabled" onclick="Add(\''+ producto.id+')">Sin Stock</button>'
-    }
-    
-      productosHTML += '<div  class="page-content">' +
-            '<h3>' + producto.nombre + '</h3>' +
-            '<img src='+producto.imagen+' alt="">' +
-            '<h1>' + producto.precio + '€/h</h1>' +
-              buttonHTML +
-        '</div>';
-    
-    });
-    document.getElementById('producto').innerHTML = productosHTML;
-}
+function generateProducts() {
+  let filtro = document.getElementById('filtro').value.toLowerCase();//cogemos id del dom, cogemos el valor y lo pasamos a minusculas
+  let productosHTML = '';
 
+  listaProductos.forEach((producto) => {//foreach que recorra los producto
+   
+    if (producto.nombre.toLowerCase().includes(filtro)) {//con el .includes miramos si esta en lo que buscamos en producto.nombre
+      let buttonHTML =
+        '<button onclick="Add(\'' + producto.id + '\', ' + producto.precio + ')">Comprar</button>';
+
+      if (producto.stock <= 0) {
+        buttonHTML = '<button disabled class="button disabled" onclick="Add(\'' + producto.id + "')\">Sin Stock</button>";
+      }
+
+      productosHTML +=
+        '<div  class="page-content">' +
+        '<h3>'+producto.nombre +'</h3>'+'<img class="pImg"src='+producto.imagen +
+        ' alt="">'+'<h1>'+producto.precio +'€</h1>' +'<h2> Cantidad: ' +producto.stock +
+        '</h2>'+'<p>'+producto.descripcion +'</p>'+buttonHTML +'</div>';
+    }
+  });
+
+  document.getElementById('producto').innerHTML = productosHTML;
+}
 
 async function fetchProductos(){
   listaProductos=await (await fetch("/api/productos")).json();
