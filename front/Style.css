@@ -144,6 +144,22 @@ nav {
     width:150px;
     height: 150px;
 }
+
+
+#loginContainer {
+  position: right;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  background-color: #f2f2f2;
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+
 /* Reglas de medios para pantalla pequeña */
 @media only screen and (max-width: 768px) {
     .page-content {

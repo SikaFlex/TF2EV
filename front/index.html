@@ -11,12 +11,17 @@
 </head>
 <body>
 	<a href="/"><img class="logo" src="img\Iconop.png" alt=""></a>
-	
-
-
-
-
-	
+	<div id="loginContainer">
+	<form id="loginForm" onsubmit="Login(event)">
+    <label for="username">Usuario:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <input type="submit" value="Iniciar sesión">
+  </form>
+</div>
 	<div class="carroTotal">
 		<button class="carro" onclick="Pay()"> 
 			<i class="fa-solid fa-cart-shopping fa-xl" style="color: #ffffff;"></i>

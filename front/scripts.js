@@ -4,7 +4,19 @@ let total=0;
 let vistaCarrito=[];
 
 
+function Login(event) {
+  event.preventDefault(); // Evita que se envíe el formulario automáticamente
 
+  var username = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
+
+  if (username === 'admin' && password === 'password') {
+    alert('Inicio de sesión exitoso');
+    window.location.href = 'index.html';
+  } else {
+    alert('Credenciales inválidas');
+  }
+}
 
 
 
@@ -21,11 +33,6 @@ function Add(producto, precio) {
     
     document.getElementById('total').innerHTML = 'Total:'+totalred+'€';
 }
-
-
-
-
-
     //funcion de pago
 async function Pay() {
   try{
