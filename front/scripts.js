@@ -4,9 +4,19 @@ let total=0;
 let vistaCarrito=[];
 
 
+const carritoDiv = document.getElementById('carrito');
 
+function actualizarCarrito() {
+  carritoDiv.innerHTML = '';
 
-
+  // Recorrer el array de objetos y construir el HTML correspondiente
+  vistaCarrito.forEach(objeto => {
+    const { id, nombre, precio } = objeto;
+    const productoDiv = document.createElement('div');
+    productoDiv.innerHTML = `<p>ID: ${id}</p><p>Nombre: ${nombre}</p><p>Precio: ${precio}</p>`;
+    carritoDiv.appendChild(productoDiv);
+  });
+}
 
 //funcion del boton del elemento
 function Add(producto, precio) {
@@ -15,11 +25,10 @@ function Add(producto, precio) {
     prod.stock-2;
     carrito.push(producto);
     vistaCarrito.push(prod);
-    total= total + precio;
-    totalred = parseInt(total);
+    total= total + precio 
+    document.getElementById('total').innerHTML = 'Total:'+total+'€';
     
-    
-    document.getElementById('total').innerHTML = 'Total:'+totalred+'€';
+
 }
 
 
