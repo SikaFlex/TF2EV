@@ -4,10 +4,19 @@ let total=0;
 let vistaCarrito=[];
 
 
-const carritoDiv = document.getElementById('carrito');
+function Login(event) {
+  event.preventDefault(); // Evita que se envíe el formulario automáticamente
 
-function actualizarCarrito() {
-  carritoDiv.innerHTML = '';
+  var username = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
+
+  if (username === 'admin' && password === 'password') {
+    alert('Inicio de sesión exitoso');
+    window.location.href = 'index.html';
+  } else {
+    alert('Credenciales inválidas');
+  }
+}
 
   // Recorrer el array de objetos y construir el HTML correspondiente
   vistaCarrito.forEach(objeto => {
@@ -30,11 +39,6 @@ function Add(producto, precio) {
     
 
 }
-
-
-
-
-
     //funcion de pago
 async function Pay() {
   try{
