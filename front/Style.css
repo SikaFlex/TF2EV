@@ -96,7 +96,9 @@ button.diabled:hover {
   background-color: #7e888d69;
 
 }
-    
+.page-content h3{
+  margin-bottom: auto;
+}    
 .page-content .pImg{
     display: flex;
     height: 100%;

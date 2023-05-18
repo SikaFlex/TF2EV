@@ -10,7 +10,7 @@ function Login(event) {
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
   let login = document.getElementById("login");
-  if (username === 'admin' && password === 'password') {
+  if (username === 'angel' && password === 'angel') {
     alert('Inicio de sesión exitoso');
      login.classList.remove("login");
      login.classList.add("disableDiv");
@@ -33,14 +33,10 @@ function Add(producto, precio) {
     total= total + precio 
     document.getElementById('total').innerHTML = 'Total:'+total+'€';
      // Recorrer el array de objetos y construir el HTML correspondiente
-  vistaCarrito.forEach(objeto => {
-    const { id, nombre, precio } = objeto;
-    const productoDiv = document.createElement('div');
-    productoDiv.innerHTML = `<p>ID: ${id}</p><p>Nombre: ${nombre}</p><p>Precio: ${precio}</p>`;
-    carritoDiv.appendChild(productoDiv);
-  });
+ 
+  };
 
-}
+
 
 
     //funcion de pago
