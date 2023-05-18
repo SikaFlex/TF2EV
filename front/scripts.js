@@ -5,40 +5,44 @@ let vistaCarrito=[];
 
 
 function Login(event) {
-  event.preventDefault(); // Evita que se envíe el formulario automáticamente
 
-  var username = document.getElementById('username').value;
-  var password = document.getElementById('password').value;
-
+  event.preventDefault(); 
+  let username = document.getElementById('username').value;
+  let password = document.getElementById('password').value;
+  let login = document.getElementById("login");
   if (username === 'admin' && password === 'password') {
     alert('Inicio de sesión exitoso');
-    window.location.href = 'index.html';
+     login.classList.remove("login");
+     login.classList.add("disableDiv");
+    
   } else {
     alert('Credenciales inválidas');
   }
 }
 
-  // Recorrer el array de objetos y construir el HTML correspondiente
+ 
+
+
+//funcion del boton del elemento
+function Add(producto, precio) {
+    
+    let prod = listaProductos.find(p => p.id == producto);
+    prod.stock-1;
+    carrito.push(producto);
+    vistaCarrito.push(prod);
+    total= total + precio 
+    document.getElementById('total').innerHTML = 'Total:'+total+'€';
+     // Recorrer el array de objetos y construir el HTML correspondiente
   vistaCarrito.forEach(objeto => {
     const { id, nombre, precio } = objeto;
     const productoDiv = document.createElement('div');
     productoDiv.innerHTML = `<p>ID: ${id}</p><p>Nombre: ${nombre}</p><p>Precio: ${precio}</p>`;
     carritoDiv.appendChild(productoDiv);
   });
-}
-
-//funcion del boton del elemento
-function Add(producto, precio) {
-    
-    let prod = listaProductos.find(p => p.id == producto);
-    prod.stock-2;
-    carrito.push(producto);
-    vistaCarrito.push(prod);
-    total= total + precio 
-    document.getElementById('total').innerHTML = 'Total:'+total+'€';
-    
 
 }
+
+
     //funcion de pago
 async function Pay() {
   try{
@@ -104,8 +108,8 @@ function generateProducts() {
 
       productosHTML +=
         '<div  class="page-content">' +
-        '<h3>'+producto.nombre +'</h3>'+'<img class="pImg"src='+producto.imagen +
-        ' alt="">'+'<h1>'+producto.precio +'€</h1>' +'<h2> Cantidad: ' +producto.stock +
+        '<h3>'+producto.nombre +'</h3>'+'<div class="divIMG"><img class="pImg"src='+producto.imagen +
+        ' alt=""></div>'+'<h1>'+producto.precio +'€</h1>' +'<h2> Cantidad: ' +producto.stock +
         '</h2>'+'<p>'+producto.descripcion +'</p>'+buttonHTML +'</div>';
     }
   });

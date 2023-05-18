@@ -7,10 +7,12 @@ body {
     width: 100%;
     margin: 0;
     overflow: auto;
+    
 }
 #producto{
   display: contents;
-  
+  margin: 10px auto;
+  justify-content: center;
 }
 .carroTotal{
   width: 100%;
@@ -137,9 +139,12 @@ nav {
     width:150px;
     height: 150px;
 }
+.disableDiv{
+  opacity: 0%;
+}
 
 
-#loginContainer {
+.login {
   position: right;
   top: 0;
   left: 0;
@@ -151,14 +156,20 @@ nav {
   display: flex;
   flex-direction: column;
 }
+.divIMG{
+  width: 100%;
+  height:300px;
+}
 
 
 /* Reglas de medios para pantalla pequeña */
 @media only screen and (max-width: 768px) {
-    .page-content {
-        flex-basis: calc(50% - 20px);
+   
+    #producto{
+      display: inline-grid;
+      width: 100%;
+      margin: 15px;
     }
-    
 }
 
 
@@ -171,4 +182,5 @@ nav {
       width: 100%;
       height: auto;
     }
+    
 }
